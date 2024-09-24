@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/ab1a723c30.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+    <div class="music-player">
+        <nav>
+            <div class="circle">
+                <i class="fa-solid fa-angle-left"></i>
+            </div>
+            <div class="circle">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </nav>
+        <img src="468-thumbnail.png"  class="song-img">
+        <h1>Best Of kk Song</h1>
+        <p>piopen . Arjit Singh</p>
+
+        <audio   id="Song">
+            <source src="Best of KK _ kk songs Juke box  Best Bollywood songs of kk  Kk hit songs  Lofi T-Series Dil Ibadat(M4A_128K)_1.m4a" type="audio/mpeg">
+        </audio>
+        <input type="range" value="0" id="progress">
+
+         <div class="controls">
+            <div><i class="fa-solid fa-backward"></i></div>
+            <div onclick="playpause()"><i class="fa-solid fa-play" id="ctrIcon"></i></div>
+            <div><i class="fa-solid fa-forward"></i></div>
+        </div>
+
+    </div>
+
+</div>
+
+      <script>
+        let progress = document.getElementById("progress");
+        let Song = document.getElementById("Song");
+        let ctrIcon = document.getElementById("ctrIcon");
+
+        Song.onloadedmetadata = function(){
+            progress.max = Song.duration;
+            progress.value = Song.currentTime;
+            
+        }
+       function playpause(){
+         if(ctrIcon.classList.contains("fa-pause")){
+            Song.pause();
+            ctrIcon.classList.remove("fa-pause")
+            ctrIcon.classList.add("fa-play")
+         }
+         else{
+            Song.play();
+            ctrIcon.classList.add("fa-pause")
+            ctrIcon.classList.remove("fa-play")
+         }
+       }
+        
+       if(Song.play()){
+        setInterval(()=>{
+            progress.value = Song.currentTime;
+        },500)
+       }
+        progress.onchange = function(){
+            Song.play();
+            Song.currentTime = progress.value;
+            ctrIcon.classList.add("fa-pause")
+            ctrIcon.classList.remove("fa-play")
+        }
+         
+             
+             </script>
+ 
+</body>
+</html>
+-- >
